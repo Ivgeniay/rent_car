@@ -1,0 +1,16 @@
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "RUN",
+			"type": "coreclr",
+			"request": "launch",
+			"preLaunchTask": "Cli build",
+			"program": "${workspaceFolder}/",
+			"args": [""],
+			"cwd": "${workspaceFolder}",
+			"stopAtEntry": false,
+			"console": "internalConsole"
+		}
+	]
+}
