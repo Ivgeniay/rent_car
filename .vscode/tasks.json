@@ -1,0 +1,77 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        // COMMON LIB
+        {
+            "label": "CommonLib: Build",
+            "type": "shell",
+            "command": "dotnet build --configuration Release",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/common_library"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher":"$msCompile"
+        },
+        {
+            "label": "CommonLib: Delivery",
+            "type": "shell",
+            "command": "cp ${workspaceFolder}/backend/common_library/RentCarLib/bin/Release/netstandard2.1/RentCarLib.dll ${workspaceFolder}/backend/",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            }
+        },
+        
+        //AUTH_SERVICE
+        {
+            "label": "AuthService: Build",
+            "type": "shell",
+            "command": "dotnet build --configuration Release",
+            "options": {
+                "cwd": "${workspaceFolder}/backend/auth_service"
+            },
+            "presentation": {
+                "echo": true,
+                "reveal": "always",
+                "focus": false,
+                "panel": "shared",
+                "showReuseMessage": true,
+                "clear": false
+            },
+            "problemMatcher":"$msCompile",
+            "dependsOrder": "sequence",
+            "dependsOn" :[
+                "CommonLib: Build",
+            ]
+        },
+        {
+            "label": "AuthService: Build And Reload",
+            "dependsOn":[
+                "AuthService: Build",
+                "VSCode: Reload Window"
+            ],
+            "dependsOrder": "sequence"
+        },
+
+        //COMMON
+        {
+            "label": "VSCode: Reload Window",
+            "command": "${command:workbench.action.reloadWindow}",
+            "type": "shell"
+        }
+    ]
+}
